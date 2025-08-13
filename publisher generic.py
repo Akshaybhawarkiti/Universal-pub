@@ -2,7 +2,8 @@
 import akpub
 
 akpub.metadata(
-     	mode=None,           # Auto-detect from datatype
+     
+        mode=None,           # Auto-detect from datatype
         datatype="Int32",  # e.g., "String", "Int32", "Image"
         node_name="num_publisher",
         topic_name="number",
