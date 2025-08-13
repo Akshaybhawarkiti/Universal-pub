@@ -26,9 +26,9 @@ TYPE_MAP = {
 
 # Guess mode if not given
 def guess_mode_from_type(dtype):
-    if dtype.lower() in ["image"]:
+    if dtype.lower() == "image":
         return "image"
-    elif dtype.lower() in ["string"]:
+    elif dtype.lower() == "string":
         return "string"
     elif dtype.lower().startswith("float") or dtype.lower().startswith("int") or dtype.lower() == "bool":
         return "number"
@@ -88,6 +88,7 @@ class GenericPublisher(Node):
             msg = self.msg_class()
             if hasattr(msg, 'data'):
                 msg.data = value
+                self.get_logger().info(f"Publishing to '{topic_name}' → {value}")
             else:
                 self.get_logger().error(f"Message type {datatype} has no 'data' field.")
                 return
@@ -97,6 +98,7 @@ class GenericPublisher(Node):
                 self.get_logger().error("No image frame provided in 'value'")
                 return
             msg = self.bridge.cv2_to_imgmsg(value, encoding="bgr8")
+            self.get_logger().info(f"Publishing to '{topic_name}' → [Image frame]")
 
         elif mode == "video":
             if not self.cap:
@@ -108,10 +110,10 @@ class GenericPublisher(Node):
                 rclpy.shutdown()
                 return
             msg = self.bridge.cv2_to_imgmsg(frame, encoding="bgr8")
+            self.get_logger().info(f"Publishing to '{topic_name}' → [Video frame]")
 
         if msg:
             self.publisher_.publish(msg)
-            self.get_logger().info(f"Published message on {topic_name}")
 
 def main(args=None):
     rclpy.init(args=args)
