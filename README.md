@@ -4,4 +4,9 @@ A basic but very important topic of ros this aloows the things to talk communica
 - Long to write 
 - Confusing 
 - Difficult to troubleshoot
-- 
+- Takes time integrate multipal
+- and more
+
+# How does akpub and aksub Help 
+
+imagine just typing few lines of small adn basic code and getting the output you want using the simple and basic publisher which you can call anytime and apply any time 
