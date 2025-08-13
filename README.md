@@ -1,14 +1,14 @@
 # 1. Publish floting value    
 
-from unipub import unipub
-unipub(
-    mode="number",
-    data_type="float",
-    nodename="universal_publisher",
-    topic_name="my_topic",
-    queue_size=10,
-    delay_period=1.0,
-    value=32.5
+from unipub import unipub  
+unipub(    
+    mode="number",    
+    data_type="float",   
+    nodename="universal_publisher",   
+    topic_name="my_topic",   
+    queue_size=10,    
+    delay_period=1.0,    
+    value=32.5    
 )
 
 
