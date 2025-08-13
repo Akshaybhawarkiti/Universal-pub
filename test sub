@@ -1,0 +1,62 @@
+import aksub
+import cv2
+
+# === STRING ===
+aksub.metadata(
+    datatype="String",
+    topic_name="chatter",
+    node_name="string_listener",
+    queue=5,
+    delay=0.5
+)
+print("String value:", aksub.received_value)
+
+# === INT ===
+aksub.metadata(
+    datatype="Int32",
+    topic_name="counter",
+    node_name="int_listener",
+    queue=10,
+    delay=1.0
+)
+print("Int value:", aksub.received_value)
+
+# === FLOAT ===
+aksub.metadata(
+    datatype="Float64",
+    topic_name="temperature",
+    node_name="float_listener",
+    queue=10,
+    delay=1.0
+)
+print("Float value:", aksub.received_value)
+
+# === IMAGE ===
+aksub.metadata(
+    datatype="Image",
+    topic_name="camera/image_raw",
+    node_name="image_listener",
+    queue=1,
+    delay=0.0
+)
+frame = aksub.received_value
+if frame is not None:
+    cv2.imshow("Received Image", frame)
+    cv2.waitKey(0)
+
+# === VIDEO STREAM ===
+aksub.metadata(
+    datatype="Image",
+    topic_name="video_stream",
+    node_name="video_listener",
+    queue=1,
+    delay=0.0
+)
+while True:
+    frame = aksub.received_value
+    if frame is not None:
+        cv2.imshow("Video", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+cv2.destroyAllWindows()
